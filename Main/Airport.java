@@ -1,8 +1,7 @@
 package Main;
 import Estrutura.*;
-import Aeroporto.*;
 
-public class ProjectMain {
+public class Airport {
 
     public static void main(String[] args) {
 

@@ -1,5 +1,6 @@
 package Estrutura;
 
+
 public class Fila {
     /* Class Aviao */
     private Aviao inicio = null;
@@ -91,11 +92,10 @@ public class Fila {
 
     /**
      * Inseri o Próximo Avião a Fila.
-     * @param valor int
+     * @param novoAviao Aviao.
      */
-    public void inserir(int valor){
+    public void inserir(Aviao novoAviao){
         if (temEspaco()) {
-            Aviao novoAviao = new Aviao(10, null);
             if (this.inicio == null){
                 this.inicio = novoAviao;
             } else {
@@ -109,10 +109,45 @@ public class Fila {
         }
     }
 
+    /**
+     * Checa o combustível de todos os aviões que estão para pousar, se tiver algum avião que tenha pouco combustível,
+     * esse avião é priorizado.
+     * @param FilaDecolagem Fila de decolagem que vai receber o Avião, caso o avião estiver com pouco combustível.
+     */
+    public void checaCombustivel(Fila FilaDecolagem){
+        Aviao aviao = this.inicio;
+        while(aviao != null){
+            if(aviao.getCombustivel() <= 2){
+                FilaDecolagem.inserir(aviao);
+                aviao = aviao.getProx();
+            }
+        }
+    }
+
+    /**
+     * Média de espera dos aviãos
+     * @return String.
+     */
+    public String tempoMediaEspera(){
+        Aviao aviao = this.inicio;
+        int horas = 0;
+        int minutos = 0;
+
+        while(aviao != null){
+            horas += aviao.getHoras();
+            minutos += aviao.getMinutos();
+        }
+        int tempo = horas * 60 + minutos / tamanho;
+
+        return Integer.toString(tempo);
+    }
+
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Tamanho = ").append(getTamanho());
+        sb.append("Tamanho = ").append(getTamanho()).append("\n");
+        sb.append("Tempo de Espera = ").append(tempoMediaEspera());
         return sb.toString();
     }
 }
