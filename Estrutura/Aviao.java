@@ -40,6 +40,7 @@ public class Aviao {
     public int getMinutos() {
         return minutos;
     }
+
     /**
      *
      * Define o tempo de espera de um aviao.
@@ -120,9 +121,10 @@ public class Aviao {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Aviao:").append("\n");
-        sb.append("Nome =").append(getNome()).append("\n");
-        sb.append("Combustível = ").append(getCombustivel()).append("\n");
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Nome = ").append(getNome()).append(" | ");
+        sb.append("Combustível = ").append(getCombustivel()).append(" | ");
+        sb.append("Tempo Esperando= ").append(getHoras() + ":").append(getMinutos());
         return sb.toString();
     }
 }

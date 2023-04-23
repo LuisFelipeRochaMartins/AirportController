@@ -76,6 +76,10 @@ public class Fila {
         return limite > tamanho;
     }
 
+    public boolean verificaFilaVazia(){
+        return this.inicio != null;
+    }
+
     /**
      * Retorna a fila por completo. Não necessário utilizar um loop para percorrê-lo.
      * @return String.
@@ -84,7 +88,7 @@ public class Fila {
         Aviao atual = this.inicio;
         StringBuilder texto = new StringBuilder();
         while (atual != null){
-            texto.append(texto.append(atual).append("\n"));
+            texto.append(atual).append("\n");
             atual = atual.getProx();
         }
         return texto.toString();
@@ -128,7 +132,7 @@ public class Fila {
      * Média de espera dos aviãos
      * @return String.
      */
-    public String tempoMediaEspera(){
+    public int tempoMediaEspera(){
         Aviao aviao = this.inicio;
         int horas = 0;
         int minutos = 0;
@@ -139,15 +143,30 @@ public class Fila {
         }
         int tempo = horas * 60 + minutos / tamanho;
 
-        return Integer.toString(tempo);
+        return tempo;
     }
 
+    /**
+     * Cada vez que for chamada diminui o combustível em -1.
+     */
+    public void diminuiCombustivelAvioes(){
+        Aviao aviao = this.inicio;
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Tamanho = ").append(getTamanho()).append("\n");
-        sb.append("Tempo de Espera = ").append(tempoMediaEspera());
-        return sb.toString();
+        while(aviao != null){
+            aviao.setCombustivel(aviao.getCombustivel()-1);
+            aviao = aviao.getProx();
+        }
+    }
+
+    /**
+     * Aumenta o tempo de todos os aviões dentro da fila.
+     */
+    public void aumentaTempoTodosAviao(){
+        Aviao aviao = this.inicio;
+
+        while(aviao != null){
+            aviao.aumentaTempo();
+            aviao = aviao.getProx();
+        }
     }
 }
