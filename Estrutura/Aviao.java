@@ -19,7 +19,7 @@ public class Aviao {
 
     /**
      * Retorna os horas que aviao está esperando pra pousar ou pra decolar.
-     * @return
+     * @return int
      */
     public int getHoras() {
         return horas;
@@ -35,7 +35,7 @@ public class Aviao {
 
     /**
      * Retorna os minutos que aviao está esperando pra pousar ou pra decolar.
-     * @return
+     * @return int
      */
     public int getMinutos() {
         return minutos;
@@ -49,9 +49,6 @@ public class Aviao {
     public void setMinutos(int minutos) {
         this.minutos = minutos;
     }
-
-
-
 
 
     public String getNome() {
@@ -124,7 +121,14 @@ public class Aviao {
         final StringBuilder sb = new StringBuilder();
         sb.append("Nome = ").append(getNome()).append(" | ");
         sb.append("Combustível = ").append(getCombustivel()).append(" | ");
-        sb.append("Tempo Esperando= ").append(getHoras() + ":").append(getMinutos());
+
+        if(this.getHoras() < 10 && this.getMinutos() == 0){
+            sb.append("Tempo Esperando= ").append("0" + this.getHoras() + ":").append("0" + this.getMinutos());
+        } else if (this.getMinutos() == 0){
+            sb.append("Tempo Esperando= ").append(this.getHoras() + ":").append("0" + this.getMinutos());
+        } else{
+            sb.append("Tempo Esperando= ").append(this.getHoras() + ":").append(this.getMinutos());
+        }
         return sb.toString();
     }
 }

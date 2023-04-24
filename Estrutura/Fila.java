@@ -12,22 +12,6 @@ public class Fila {
     }
 
     /**
-     * Retorna o primeiro indíce da Fila.
-     * @return int
-     */
-    public Aviao getinicio() {
-        return inicio;
-    }
-
-    /**
-     * Remove o primeiro indice da Fila.
-     */
-    public void remover(){
-        inicio = inicio.getProx();
-        this.tamanho -= 1;
-    }
-
-    /**
      * Retorna o Tamanho da Fila.
      * @return int
      */
@@ -68,6 +52,21 @@ public class Fila {
     }
 
     /**
+     * Remove o primeiro indice da Fila.
+     */
+    public void remover(){
+        Aviao aviao = getInicio();
+        if(aviao.getProx() != null){
+            inicio = aviao.getProx();
+        }else{
+            inicio = null;
+        }
+        this.tamanho -= 1;
+    }
+
+
+
+    /**
      * Retorna se a fila pode incrementada.
      * @return boolean.
      */
@@ -84,7 +83,7 @@ public class Fila {
      * Retorna a fila por completo. Não necessário utilizar um loop para percorrê-lo.
      * @return String.
      */
-    public String show_fila(){
+    public String mostraFila(){
         Aviao atual = this.inicio;
         StringBuilder texto = new StringBuilder();
         while (atual != null){
@@ -116,23 +115,30 @@ public class Fila {
     /**
      * Checa o combustível de todos os aviões que estão para pousar, se tiver algum avião que tenha pouco combustível,
      * esse avião é priorizado.
-     * @param FilaDecolagem Fila de decolagem que vai receber o Avião, caso o avião estiver com pouco combustível.
      */
-    public void checaCombustivel(Fila FilaDecolagem){
+    public int checaCombustivel(){
         Aviao aviao = this.inicio;
+
+        int avioesSemCombustivel = 0;
         while(aviao != null){
-            if(aviao.getCombustivel() <= 2){
-                FilaDecolagem.inserir(aviao);
-                aviao = aviao.getProx();
+            if(aviao.getProx() != null){
+                if(aviao.getProx().getCombustivel() <= 2){
+                    aviao.setProx(aviao.getProx().getProx());
+                    tamanho -= 1;
+                    avioesSemCombustivel += 1;
+
+                }
             }
+            aviao = aviao.getProx();
         }
+        return avioesSemCombustivel;
     }
 
     /**
      * Média de espera dos aviãos
      * @return String.
      */
-    public int tempoMediaEspera(){
+    public float tempoMediaEspera(){
         Aviao aviao = this.inicio;
         int horas = 0;
         int minutos = 0;
@@ -140,10 +146,14 @@ public class Fila {
         while(aviao != null){
             horas += aviao.getHoras();
             minutos += aviao.getMinutos();
+            aviao = aviao.getProx();
         }
-        int tempo = horas * 60 + minutos / tamanho;
 
-        return tempo;
+        if(tamanho ==0){
+            return 0;
+        }
+
+        return (horas * 60 + minutos / tamanho);
     }
 
     /**
