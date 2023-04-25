@@ -28,11 +28,9 @@ public class Aeroporto {
                     System.out.println("Aviões que foram priorizados: " + filaAterrissagem.checaCombustivel() + "\n");
                 }
 
-                if(filaDecolagem.getInicio() != null){
-                    for (int i = 0; i < rand.nextInt(0,3); i++) {
-                        if(filaDecolagem.getInicio() != null){
-                            filaDecolagem.remover();
-                        }
+                for (int i = 0; i < rand.nextInt(1,3); i++) {
+                    if(filaDecolagem.getInicio() != null){
+                        filaDecolagem.remover();
                     }
                 }
 
@@ -40,11 +38,9 @@ public class Aeroporto {
                  * por exemplo se 1 avião com prioridade foi remove outro avião sem prioridade vai ser removido.
                  * dupla verifica pois, se no meio do loop a fila ficar vazia resultava em erro.
                  */
-                if(filaAterrissagem.getInicio() != null){
-                    for (int i = 0; i < 2 - filaAterrissagem.checaCombustivel(); i++) {
-                        if(filaAterrissagem.getInicio() != null){
-                            filaAterrissagem.remover();
-                        }
+                for (int i = 0; i < 2 - filaAterrissagem.checaCombustivel(); i++) {
+                    if(filaAterrissagem.getInicio() != null){
+                        filaAterrissagem.remover();
                     }
                 }
             }

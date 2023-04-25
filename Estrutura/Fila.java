@@ -1,12 +1,14 @@
 package Estrutura;
 
 
+import java.util.Iterator;
+
 public class Fila {
+
     /* Class Aviao */
     private Aviao inicio = null;
     private final int limite;
     private int tamanho = 0;
-
     public Fila(int limite) {
         this.limite = limite;
     }
@@ -153,7 +155,7 @@ public class Fila {
             return 0;
         }
 
-        return (horas * 60 + minutos / tamanho);
+        return ((horas * 60 + minutos) / tamanho);
     }
 
     /**
