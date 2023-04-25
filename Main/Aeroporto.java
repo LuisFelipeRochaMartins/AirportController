@@ -23,20 +23,28 @@ public class Aeroporto {
                 filaDecolagem.aumentaTempoTodosAviao();
 
                 filaAterrissagem.diminuiCombustivelAvioes();
-                System.out.println("Aviões que foram priorizados: " + filaAterrissagem.checaCombustivel());
+
+                if(filaAterrissagem.getInicio() != null){
+                    System.out.println("Aviões que foram priorizados: " + filaAterrissagem.checaCombustivel() + "\n");
+                }
 
                 if(filaDecolagem.getInicio() != null){
                     for (int i = 0; i < rand.nextInt(0,3); i++) {
-                        filaDecolagem.remover();
+                        if(filaDecolagem.getInicio() != null){
+                            filaDecolagem.remover();
+                        }
                     }
                 }
 
                 /* verifica quantos aviões foram priorizados e remove a quantidade que sobrar
                  * por exemplo se 1 avião com prioridade foi remove outro avião sem prioridade vai ser removido.
+                 * dupla verifica pois, se no meio do loop a fila ficar vazia resultava em erro.
                  */
                 if(filaAterrissagem.getInicio() != null){
-                    for (int i = 0; i < filaAterrissagem.checaCombustivel() - 2; i++) {
-                        filaAterrissagem.remover();
+                    for (int i = 0; i < 2 - filaAterrissagem.checaCombustivel(); i++) {
+                        if(filaAterrissagem.getInicio() != null){
+                            filaAterrissagem.remover();
+                        }
                     }
                 }
             }
@@ -62,17 +70,17 @@ public class Aeroporto {
             System.out.println("Fila Decolagem" + "\n" + filaDecolagem.mostraFila());
 
 
-            System.out.println("Número de Aviões que decolaram : " + randDecolagem);
-            System.out.println("Número de Aviões que aterrissaram : " + randAterrissagem + "\n");
+            System.out.println("Número de Aviões que aterrissaram : " + randAterrissagem );
+            System.out.println("Número de Aviões que decolaram : " + randDecolagem + "\n");
 
-            System.out.println("Tempo de Espera da Fila de Aterrissagem: " + filaDecolagem.tempoMediaEspera());
-             System.out.println("Tempo de Espera da Fila de Decolagem: " + filaAterrissagem.tempoMediaEspera());
+            System.out.println("Tempo de Espera da Fila de Aterrissagem: " + filaAterrissagem.tempoMediaEspera() + " minutos");
+            System.out.println("Tempo de Espera da Fila de Decolagem: " + filaDecolagem.tempoMediaEspera() + " minutos");
 
             System.out.print("Deseja continuar a simulação? [0/1] ");
             int opc = input.nextInt();
 
             while(opc != 0 && opc != 1) {
-                System.out.println("Opção inválida, digite novamente!");
+                System.out.println("\nOpção inválida, digite novamente! ");
                 opc = input.nextInt();
             }
 

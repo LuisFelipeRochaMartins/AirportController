@@ -149,7 +149,7 @@ public class Fila {
             aviao = aviao.getProx();
         }
 
-        if(tamanho ==0){
+        if(tamanho == 0){
             return 0;
         }
 
